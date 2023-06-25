@@ -6,6 +6,7 @@
     <th>Driver</th>
     <th>Conductor</th>
     <th>ViewDetails</th>
+    <th>Delete</th>
   </tr>
 {% for vehicle in vehicles %}
 <tr>
@@ -15,7 +16,7 @@
     <td>{{vehicle['conductor']}}</td>
     <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">MoreDetails</td>
     <td>
-      <a href="{{url_for("vehicle_by_id", id=vehicle['id'])}} ">DELETE</a>
+      <a href="{{url_for("delete_vehicle", id=vehicle['id'])}} ">DELETE</a>
       
     </td>   
 </tr>
