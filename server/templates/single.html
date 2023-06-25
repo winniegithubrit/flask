@@ -41,14 +41,11 @@
    updateConts = document.getElementById("update_container")
 
    updateBtn.addEventListener('click', (e) => {
-      if (updateConts.style.display == 'none') {
-         e.preventDefault()
-         updateConts.style.display = 'block'
-      } else {
-         updateConts.style.display = 'none'
-      }
-   })
+      e.preventDefault();
+      updateConts.style.display = (updateConts.style.display === 'none') ? 'block' : 'none';
+   });
 </script>
+
 
 <style>
    body {
