@@ -1,34 +1,37 @@
-<h4>VEHICLE PROFILE</h4>
+<div id="vehicle_profile">
+   <h4>VEHICLE PROFILE</h4>
 
-<h5>ID:{{vehicle['id']}}</h5>
-<h5>VEHICLE_NAME:{{vehicle['name']}}</h5>
-<h5>DRIVER:{{vehicle['driver']}}</h5>
-<h5>CONDUCTOR:{{vehicle['conductor']}}</h5>
-ROUTES_TAKEN:
-{%if routings%}
-<ul>
-   {% for route in routings %}
-   <li>{{route['name']}}<li>
-   {%endfor%}
-   <ul>
-{%endif%}
+   <h5>ID:{{vehicle['id']}}</h5>
+   <h5>VEHICLE_NAME:{{vehicle['name']}}</h5>
+   <h5>DRIVER:{{vehicle['driver']}}</h5>
+   <h5>CONDUCTOR:{{vehicle['conductor']}}</h5>
 
-<button id="update_vehicle">UPDATE</button>
-<div id="update_container">
-<form action= {{url_for("vehicle_by_id",id=vehicle['id'])}} method='POST'>
-  <h2>Update Vehicle</h2>
-<input type="number" name="id" placeholder="Enter ID" value="{{ vehicle['id'] }}"><br></br>
-<input type="text" name="name" placeholder="Enter Name" value="{{ vehicle['name'] }}"><br></br>
-<input type="text" name="driver" placeholder="Enter Driver" value="{{ vehicle['driver'] }}"><br></br>
-<input type="text" name="conductor" placeholder="Enter Conductor" value="{{ vehicle['conductor'] }}"><br></br>
-<input type="submit" value="Update Vehicle"><br></br>
+   <h5>ROUTES_TAKEN:</h5>
+   {% if routings %}
+      <ul>
+         {% for route in routings %}
+            <li>{{route['name']}}</li>
+         {% endfor %}
+      </ul>
+   {% endif %}
 
-</form>
+   <button id="update_vehicle">UPDATE</button>
+   <div id="update_container">
+      <form action="{{url_for('vehicle_by_id', id=vehicle['id'])}}" method="POST">
+         <h2>Update Vehicle</h2>
+         <input type="number" name="id" placeholder="Enter ID" value="{{ vehicle['id'] }}"><br><br>
+         <input type="text" name="name" placeholder="Enter Name" value="{{ vehicle['name'] }}"><br><br>
+         <input type="text" name="driver" placeholder="Enter Driver" value="{{ vehicle['driver'] }}"><br><br>
+         <input type="text" name="conductor" placeholder="Enter Conductor" value="{{ vehicle['conductor'] }}"><br><br>
+         <input type="submit" value="Update Vehicle"><br><br>
+      </form>
+   </div>
 </div>
+
 <style>
-   #update_container{
-    background-color:#09871a;
-    display:none; 
+   #update_container {
+      background-color: #09871a;
+      display: none;
    }
 </style>
 
@@ -37,19 +40,103 @@ ROUTES_TAKEN:
    console.log(updateBtn)
    updateConts = document.getElementById("update_container")
 
-   updateBtn.addEventListener('click',(e)=> {
-      if(updateConts.style.display == 'none'){
+   updateBtn.addEventListener('click', (e) => {
+      if (updateConts.style.display == 'none') {
          e.preventDefault()
-         updateConts.style.display ='block'
-
-      }else {
+         updateConts.style.display = 'block'
+      } else {
          updateConts.style.display = 'none'
       }
    })
-
-
-
 </script>
 
+<style>
+   body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+   }
+
+   #vehicle_profile {
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffd480;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   }
+
+   h4 {
+      text-align: center;
+      color: #333333;
+      margin-bottom: 30px;
+      font-size: 24px;
+   }
+
+   h5 {
+      color: #333333;
+      margin-bottom: 15px;
+      font-size: 18px;
+   }
+
+   ul {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 15px;
+   }
+
+   li {
+      margin-bottom: 5px;
+   }
+
+   #update_vehicle {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 24px;
+      background-color: #ff6600;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 18px;
+   }
+
+   #update_container {
+      background-color: #ff8000;
+      display: none;
+      padding: 40px;
+      margin: 0 auto;
+      text-align: center;
+   }
+
+   #update_container form {
+      margin-bottom: 0;
+   }
+
+   h2 {
+      color: #ffffff;
+      margin-bottom: 30px;
+      font-size: 24px;
+   }
+
+   input[type="number"],
+   input[type="text"],
+   input[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+      font-size: 18px;
+   }
+
+   input[type="submit"] {
+      background-color: #ff9900;
+      color: #ffffff;
+      cursor: pointer;
+   }
+
+   input[type="submit"]:hover {
+      background-color: #ff8000;
+   }
+</style>
 
 

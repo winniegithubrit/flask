@@ -1,39 +1,136 @@
-<h1>LA_PAZ VEHICLE COMPANY LIMITED</h1>
-<table>
-  <tr>
-    <th>vehicleId</th>
-    <th>Name</th>
-    <th>Driver</th>
-    <th>Conductor</th>
-    <th>ViewDetails</th>
-    <th>Update</th>
-    <th>Delete</th>
-  </tr>
-{% for vehicle in vehicles %}
-<tr>
-    <td>{{vehicle['id']}}</td>
-    <td>{{vehicle['name']}}</td>
-    <td>{{vehicle['driver']}}</td>
-    <td>{{vehicle['conductor']}}</td>
-    <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">MoreDetails</td>
-    <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">Update</td>
-    <td>
-      <a href="{{url_for("delete_vehicle", id=vehicle['id'])}} ">DELETE</a>
-      
-    </td>   
-</tr>
-{% endfor %}
-</table>
-<br></br>
-<form action= {{url_for("index")}} method='POST'>
-  <h2>Add Vehicle</h2>
-  <input type="number" name="id" placeholder="Enter ID"><br></br>
-  <input type="text" name="name" placeholder="Enter Name"><br></br>
-  <input type="text" name="driver" placeholder="Enter Driver"><br></br>
-  <input type="text" name="conductor" placeholder="Enter Conductor"><br></br>
-  <input type="submit" value="Add Vehicle"><br></br>
-</form>
+<div id="company">
+   <h1>LA_PAZ VEHICLE COMPANY LIMITED</h1>
+   <table>
+      <tr>
+         <th>vehicleId</th>
+         <th>Name</th>
+         <th>Driver</th>
+         <th>Conductor</th>
+         <th>ViewDetails</th>
+         <th>Update</th>
+         <th>Delete</th>
+      </tr>
+      {% for vehicle in vehicles %}
+         <tr>
+            <td>{{vehicle['id']}}</td>
+            <td>{{vehicle['name']}}</td>
+            <td>{{vehicle['driver']}}</td>
+            <td>{{vehicle['conductor']}}</td>
+            <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">MoreDetails</a></td>
+            <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">Update</a></td>
+            <td>
+               <a href="{{url_for('delete_vehicle', id=vehicle['id'])}}">DELETE</a>
+            </td>   
+         </tr>
+      {% endfor %}
+   </table>
+   <br><br>
+   <div id="add_vehicle">
+      <form action="{{url_for('index')}}" method="POST">
+         <h2>Add Vehicle</h2>
+         <input type="number" name="id" placeholder="Enter ID"><br><br>
+         <input type="text" name="name" placeholder="Enter Name"><br><br>
+         <input type="text" name="driver" placeholder="Enter Driver"><br><br>
+         <input type="text" name="conductor" placeholder="Enter Conductor"><br><br>
+         <input type="submit" value="Add Vehicle"><br><br>
+      </form>
+   </div>
+</div>
 
+<style>
+   body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+   }
 
+   #company {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   }
 
+   h1 {
+      text-align: center;
+      color: #333333;
+      margin-bottom: 30px;
+   }
 
+   table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+   }
+
+   th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #dddddd;
+   }
+
+   th {
+      background-color: #f9f9f9;
+      color: #333333;
+   }
+
+   tr:hover {
+      background-color: #f2f2f2;
+   }
+
+   a {
+      text-decoration: none;
+      color: #333333;
+   }
+
+   #add_vehicle {
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+   }
+
+   h2 {
+      color: #333333;
+      margin-bottom: 20px;
+   }
+
+   input[type="number"],
+   input[type="text"],
+   input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #dddddd;
+      border-radius: 4px;
+   }
+
+   input[type="submit"] {
+      background-color: #09871a;
+      color: #ffffff;
+      cursor: pointer;
+   }
+
+   input[type="submit"]:hover {
+      background-color: #066811;
+   }
+
+   /* Additional Color Styles */
+
+   h1 {
+      color: #ff6600;
+   }
+
+   tr:hover {
+      background-color: #ffcc99;
+   }
+
+   input[type="submit"] {
+      background-color: #ff6600;
+   }
+
+   input[type="submit"]:hover {
+      background-color: #ff8000;
+   }
+</style>
