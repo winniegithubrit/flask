@@ -19,25 +19,28 @@ def index():
         db.session.commit()
         vehicles = Vehicle.query.all()  
         return render_template('index.html', vehicles=vehicles)
-
-# @app.route('/vehicles/<int:id>', methods=['GET', 'DELETE', 'PATCH'])
-# def vehicle_by_id():
-#   if request.method == 'GET':
     
-#     render_template('single.html',id=id)
-#   # if request.method == 'PATCH':
-#   # if request.method == 'DELETE':
-@app.route('/vehicles/<int:id>', methods=['GET', 'PATCH'])
+@app.route('/vehicles/<int:id>', methods=['GET', 'PATCH', 'POST'])
 def vehicle_by_id(id):
     if request.method == 'GET':
-
-        vehicle = Vehicle.query.filter_by(id=id).first()
+        vehicle = Vehicle.query.get(id)
         routings = Route.query.filter_by(vehicle_id=id)
       
         if vehicle:
             return render_template('single.html', id=id, vehicle=vehicle, routings=routings)
         else:
             return "Vehicle not found"
+    
+    if request.method == 'POST':
+        vehicle = Vehicle.query.get(id)
+        if vehicle:
+            for key, value in request.form.items():
+                setattr(vehicle, key, value)
+            db.session.commit()
+            return render_template('single.html', vehicle=vehicle)
+        else:
+            return "Vehicle not found"
+
           
 @app.route('/delete<int:id>')
 def delete_vehicle(id):

@@ -13,5 +13,43 @@ ROUTES_TAKEN:
    <ul>
 {%endif%}
 
+<button id="update_vehicle">UPDATE</button>
+<div id="update_container">
+<form action= {{url_for("vehicle_by_id",id=vehicle['id'])}} method='POST'>
+  <h2>Update Vehicle</h2>
+<input type="number" name="id" placeholder="Enter ID" value="{{ vehicle['id'] }}"><br></br>
+<input type="text" name="name" placeholder="Enter Name" value="{{ vehicle['name'] }}"><br></br>
+<input type="text" name="driver" placeholder="Enter Driver" value="{{ vehicle['driver'] }}"><br></br>
+<input type="text" name="conductor" placeholder="Enter Conductor" value="{{ vehicle['conductor'] }}"><br></br>
+<input type="submit" value="Update Vehicle"><br></br>
+
+</form>
+</div>
+<style>
+   #update_container{
+    background-color:#09871a;
+    display:none; 
+   }
+</style>
+
+<script>
+   updateBtn = document.getElementById("update_vehicle")
+   console.log(updateBtn)
+   updateConts = document.getElementById("update_container")
+
+   updateBtn.addEventListener('click',(e)=> {
+      if(updateConts.style.display == 'none'){
+         e.preventDefault()
+         updateConts.style.display ='block'
+
+      }else {
+         updateConts.style.display = 'none'
+      }
+   })
+
+
+
+</script>
+
 
 
