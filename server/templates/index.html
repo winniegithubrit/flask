@@ -1,0 +1,35 @@
+<h1>LA_PAZ VEHICLE COMPANY LIMITED</h1>
+<table>
+  <tr>
+    <th>vehicleId</th>
+    <th>Name</th>
+    <th>Driver</th>
+    <th>Conductor</th>
+    <th>ViewDetails</th>
+  </tr>
+{% for vehicle in vehicles %}
+<tr>
+    <td>{{vehicle['id']}}</td>
+    <td>{{vehicle['name']}}</td>
+    <td>{{vehicle['driver']}}</td>
+    <td>{{vehicle['conductor']}}</td>
+    <td><a href="{{ url_for('vehicle_by_id', id=vehicle['id'])}}">MoreDetails</td>
+    <td>
+      <a href="{{url_for("vehicle_by_id", id=vehicle['id'])}} ">DELETE</a>
+      
+    </td>   
+</tr>
+{% endfor %}
+</table>
+<br></br>
+<form action= {{url_for("index")}} method='POST'>
+  <h2>Add Vehicle</h2>
+  <input type="number" name="id" placeholder="Enter ID"><br></br>
+  <input type="text" name="name" placeholder="Enter Name"><br></br>
+  <input type="text" name="driver" placeholder="Enter Driver"><br></br>
+  <input type="text" name="conductor" placeholder="Enter Conductor"><br></br>
+  <input type="submit" value="Add Vehicle"><br></br>
+</form>
+
+
+

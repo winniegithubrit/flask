@@ -1,0 +1,851 @@
+from main import app
+from models import Vehicle, Route, db
+
+sample_data = [{
+  "id": 1,
+  "name": "Lexus",
+  "driver": "Alta",
+  "conductor": "Cacilie"
+}, {
+  "id": 2,
+  "name": "Jeep",
+  "driver": "Rivy",
+  "conductor": "Charity"
+}, {
+  "id": 3,
+  "name": "Suzuki",
+  "driver": "Roana",
+  "conductor": "Sergent"
+}, {
+  "id": 4,
+  "name": "Acura",
+  "driver": "Coraline",
+  "conductor": "Susie"
+}, {
+  "id": 5,
+  "name": "Pontiac",
+  "driver": "Raimondo",
+  "conductor": "Max"
+}, {
+  "id": 6,
+  "name": "Pontiac",
+  "driver": "Jourdan",
+  "conductor": "Petronille"
+}, {
+  "id": 7,
+  "name": "Mercedes-Benz",
+  "driver": "Angelina",
+  "conductor": "Frieda"
+}, {
+  "id": 8,
+  "name": "Ford",
+  "driver": "Marlane",
+  "conductor": "Ebony"
+}, {
+  "id": 9,
+  "name": "GMC",
+  "driver": "Wolf",
+  "conductor": "Bernie"
+}, {
+  "id": 10,
+  "name": "GMC",
+  "driver": "Wilhelmine",
+  "conductor": "Marv"
+}, {
+  "id": 11,
+  "name": "Chevrolet",
+  "driver": "Darsie",
+  "conductor": "Homere"
+}, {
+  "id": 12,
+  "name": "Saturn",
+  "driver": "Maxine",
+  "conductor": "Tammie"
+}, {
+  "id": 13,
+  "name": "Mercedes-Benz",
+  "driver": "Berry",
+  "conductor": "Ava"
+}, {
+  "id": 14,
+  "name": "Jeep",
+  "driver": "Millard",
+  "conductor": "Serene"
+}, {
+  "id": 15,
+  "name": "Chevrolet",
+  "driver": "Miguel",
+  "conductor": "Blanca"
+}, {
+  "id": 16,
+  "name": "Chrysler",
+  "driver": "Neale",
+  "conductor": "Selma"
+}, {
+  "id": 17,
+  "name": "Volvo",
+  "driver": "Joletta",
+  "conductor": "Shandee"
+}, {
+  "id": 18,
+  "name": "Mazda",
+  "driver": "Lilli",
+  "conductor": "Rickert"
+}, {
+  "id": 19,
+  "name": "Kia",
+  "driver": "Wilburt",
+  "conductor": "Mohandas"
+}, {
+  "id": 20,
+  "name": "Ford",
+  "driver": "Tarrance",
+  "conductor": "Ware"
+}, {
+  "id": 21,
+  "name": "Saab",
+  "driver": "Risa",
+  "conductor": "Lucky"
+}, {
+  "id": 22,
+  "name": "Volvo",
+  "driver": "Edgardo",
+  "conductor": "Artair"
+}, {
+  "id": 23,
+  "name": "Mitsubishi",
+  "driver": "Bil",
+  "conductor": "Audi"
+}, {
+  "id": 24,
+  "name": "Volvo",
+  "driver": "Artus",
+  "conductor": "Skippie"
+}, {
+  "id": 25,
+  "name": "Mercury",
+  "driver": "Josepha",
+  "conductor": "Meggi"
+}, {
+  "id": 26,
+  "name": "Mitsubishi",
+  "driver": "Sosanna",
+  "conductor": "Gertrudis"
+}, {
+  "id": 27,
+  "name": "Acura",
+  "driver": "Alonzo",
+  "conductor": "Grove"
+}, {
+  "id": 28,
+  "name": "Mazda",
+  "driver": "Stanton",
+  "conductor": "Fredra"
+}, {
+  "id": 29,
+  "name": "Ford",
+  "driver": "Elka",
+  "conductor": "Shelagh"
+}, {
+  "id": 30,
+  "name": "Mazda",
+  "driver": "Nefen",
+  "conductor": "Katharina"
+}, {
+  "id": 31,
+  "name": "Maybach",
+  "driver": "Mahalia",
+  "conductor": "Germain"
+}, {
+  "id": 32,
+  "name": "Ford",
+  "driver": "Issie",
+  "conductor": "Dorry"
+}, {
+  "id": 33,
+  "name": "Isuzu",
+  "driver": "Fancie",
+  "conductor": "Lynelle"
+}, {
+  "id": 34,
+  "name": "Mercury",
+  "driver": "Adrian",
+  "conductor": "Mano"
+}, {
+  "id": 35,
+  "name": "Honda",
+  "driver": "Theodor",
+  "conductor": "Free"
+}, {
+  "id": 36,
+  "name": "Nissan",
+  "driver": "Bidget",
+  "conductor": "Gregoire"
+}, {
+  "id": 37,
+  "name": "Volvo",
+  "driver": "Xavier",
+  "conductor": "Sonny"
+}, {
+  "id": 38,
+  "name": "Jeep",
+  "driver": "Anna-maria",
+  "conductor": "Linc"
+}, {
+  "id": 39,
+  "name": "Mercury",
+  "driver": "Carlynn",
+  "conductor": "Justus"
+}, {
+  "id": 40,
+  "name": "Audi",
+  "driver": "Sarena",
+  "conductor": "Sally"
+}, {
+  "id": 41,
+  "name": "Kia",
+  "driver": "Ramsey",
+  "conductor": "Rancell"
+}, {
+  "id": 42,
+  "name": "Pontiac",
+  "driver": "Sher",
+  "conductor": "Veradis"
+}, {
+  "id": 43,
+  "name": "Chevrolet",
+  "driver": "Sheelah",
+  "conductor": "Myrilla"
+}, {
+  "id": 44,
+  "name": "Lincoln",
+  "driver": "Bud",
+  "conductor": "Gaven"
+}, {
+  "id": 45,
+  "name": "Toyota",
+  "driver": "Yasmeen",
+  "conductor": "Cristobal"
+}, {
+  "id": 46,
+  "name": "Mercury",
+  "driver": "Annabal",
+  "conductor": "Drusi"
+}, {
+  "id": 47,
+  "name": "Cadillac",
+  "driver": "Gardener",
+  "conductor": "Eadie"
+}, {
+  "id": 48,
+  "name": "Mazda",
+  "driver": "Gearalt",
+  "conductor": "Mathilde"
+}, {
+  "id": 49,
+  "name": "Mercedes-Benz",
+  "driver": "Heath",
+  "conductor": "Lolly"
+}, {
+  "id": 50,
+  "name": "Plymouth",
+  "driver": "Lorry",
+  "conductor": "Dacey"
+}, {
+  "id": 51,
+  "name": "Shelby",
+  "driver": "Cristian",
+  "conductor": "Rosie"
+}, {
+  "id": 52,
+  "name": "Plymouth",
+  "driver": "Kari",
+  "conductor": "Alyosha"
+}, {
+  "id": 53,
+  "name": "Ford",
+  "driver": "Jolynn",
+  "conductor": "Gregory"
+}, {
+  "id": 54,
+  "name": "Infiniti",
+  "driver": "Eloisa",
+  "conductor": "Gottfried"
+}, {
+  "id": 55,
+  "name": "Mazda",
+  "driver": "Carl",
+  "conductor": "Jessalin"
+}, {
+  "id": 56,
+  "name": "Volvo",
+  "driver": "Bennie",
+  "conductor": "Molli"
+}, {
+  "id": 57,
+  "name": "GMC",
+  "driver": "Cash",
+  "conductor": "Wade"
+}, {
+  "id": 58,
+  "name": "Chevrolet",
+  "driver": "Delila",
+  "conductor": "Graham"
+}, {
+  "id": 59,
+  "name": "Chevrolet",
+  "driver": "Isak",
+  "conductor": "Ahmad"
+}, {
+  "id": 60,
+  "name": "GMC",
+  "driver": "Lian",
+  "conductor": "Loralee"
+}, {
+  "id": 61,
+  "name": "Mazda",
+  "driver": "Leonore",
+  "conductor": "Umeko"
+}, {
+  "id": 62,
+  "name": "Lexus",
+  "driver": "Matthiew",
+  "conductor": "Cristi"
+}, {
+  "id": 63,
+  "name": "Kia",
+  "driver": "Paola",
+  "conductor": "Iorgos"
+}, {
+  "id": 64,
+  "name": "Volkswagen",
+  "driver": "Brandice",
+  "conductor": "Frederich"
+}, {
+  "id": 65,
+  "name": "Ford",
+  "driver": "Corri",
+  "conductor": "Aarika"
+}, {
+  "id": 66,
+  "name": "Buick",
+  "driver": "Garry",
+  "conductor": "Caron"
+}, {
+  "id": 67,
+  "name": "Cadillac",
+  "driver": "Bogart",
+  "conductor": "Nichol"
+}, {
+  "id": 68,
+  "name": "Volkswagen",
+  "driver": "Enrico",
+  "conductor": "Aron"
+}, {
+  "id": 69,
+  "name": "MINI",
+  "driver": "Krystalle",
+  "conductor": "Mayer"
+}, {
+  "id": 70,
+  "name": "Isuzu",
+  "driver": "Dorree",
+  "conductor": "Hannis"
+}, {
+  "id": 71,
+  "name": "Ford",
+  "driver": "Krishnah",
+  "conductor": "Jewell"
+}, {
+  "id": 72,
+  "name": "GMC",
+  "driver": "Mano",
+  "conductor": "Joelle"
+}, {
+  "id": 73,
+  "name": "BMW",
+  "driver": "Keriann",
+  "conductor": "Arielle"
+}, {
+  "id": 74,
+  "name": "GMC",
+  "driver": "Moselle",
+  "conductor": "Inesita"
+}, {
+  "id": 75,
+  "name": "Buick",
+  "driver": "Maddalena",
+  "conductor": "Rosella"
+}, {
+  "id": 76,
+  "name": "Dodge",
+  "driver": "Sigismundo",
+  "conductor": "Boyce"
+}, {
+  "id": 77,
+  "name": "Lotus",
+  "driver": "Carmina",
+  "conductor": "Blinnie"
+}, {
+  "id": 78,
+  "name": "Nissan",
+  "driver": "Far",
+  "conductor": "Harold"
+}, {
+  "id": 79,
+  "name": "Mercury",
+  "driver": "Stephine",
+  "conductor": "Allys"
+}, {
+  "id": 80,
+  "name": "Chrysler",
+  "driver": "Andra",
+  "conductor": "Ginger"
+}, {
+  "id": 81,
+  "name": "Dodge",
+  "driver": "Hartwell",
+  "conductor": "Raquel"
+}, {
+  "id": 82,
+  "name": "Saab",
+  "driver": "Asher",
+  "conductor": "Casie"
+}, {
+  "id": 83,
+  "name": "Honda",
+  "driver": "Darsie",
+  "conductor": "Willis"
+}, {
+  "id": 84,
+  "name": "Mercedes-Benz",
+  "driver": "Marna",
+  "conductor": "Damaris"
+}, {
+  "id": 85,
+  "name": "Nissan",
+  "driver": "Fletcher",
+  "conductor": "Emmye"
+}, {
+  "id": 86,
+  "name": "Lincoln",
+  "driver": "Dyana",
+  "conductor": "Sephira"
+}, {
+  "id": 87,
+  "name": "BMW",
+  "driver": "Conrade",
+  "conductor": "Rebecca"
+}, {
+  "id": 88,
+  "name": "Volkswagen",
+  "driver": "Krisha",
+  "conductor": "Petronia"
+}, {
+  "id": 89,
+  "name": "Acura",
+  "driver": "Hans",
+  "conductor": "Sharline"
+}, {
+  "id": 90,
+  "name": "Dodge",
+  "driver": "Dietrich",
+  "conductor": "Irvin"
+}, {
+  "id": 91,
+  "name": "Subaru",
+  "driver": "Clea",
+  "conductor": "Tommy"
+}, {
+  "id": 92,
+  "name": "Nissan",
+  "driver": "Welsh",
+  "conductor": "Indira"
+}, {
+  "id": 93,
+  "name": "Mercury",
+  "driver": "Sibley",
+  "conductor": "Eddie"
+}, {
+  "id": 94,
+  "name": "Jeep",
+  "driver": "Carlee",
+  "conductor": "Prue"
+}, {
+  "id": 95,
+  "name": "Toyota",
+  "driver": "Cordy",
+  "conductor": "Bale"
+}, {
+  "id": 96,
+  "name": "Oldsmobile",
+  "driver": "Gamaliel",
+  "conductor": "Reilly"
+}, {
+  "id": 97,
+  "name": "Ford",
+  "driver": "Ketty",
+  "conductor": "Fey"
+}, {
+  "id": 98,
+  "name": "Jeep",
+  "driver": "Ortensia",
+  "conductor": "Willabella"
+}, {
+  "id": 99,
+  "name": "Pontiac",
+  "driver": "Austin",
+  "conductor": "Thadeus"
+}, {
+  "id": 100,
+  "name": "Acura",
+  "driver": "Doralynn",
+  "conductor": "Mersey"
+}]
+
+
+
+
+
+
+routes = [{
+  "id": 1,
+  "name": "Longbei"
+}, {
+  "id": 2,
+  "name": "Kishorganj"
+}, {
+  "id": 3,
+  "name": "Chinchaypujio"
+}, {
+  "id": 4,
+  "name": "Kimanuit"
+}, {
+  "id": 5,
+  "name": "Karangampel"
+}, {
+  "id": 6,
+  "name": "Portumna"
+}, {
+  "id": 7,
+  "name": "Belozërsk"
+}, {
+  "id": 8,
+  "name": "Golina"
+}, {
+  "id": 9,
+  "name": "Göteborg"
+}, {
+  "id": 10,
+  "name": "Kandava"
+}, {
+  "id": 11,
+  "name": "Zhenhai"
+}, {
+  "id": 12,
+  "name": "Zvëzdnyy"
+}, {
+  "id": 13,
+  "name": "Luotuo"
+}, {
+  "id": 14,
+  "name": "Askersund"
+}, {
+  "id": 15,
+  "name": "Tanjiaqiao"
+}, {
+  "id": 16,
+  "name": "Llusco"
+}, {
+  "id": 17,
+  "name": "Jamaica"
+}, {
+  "id": 18,
+  "name": "Longzhouwan"
+}, {
+  "id": 19,
+  "name": "Nowshera Cantonment"
+}, {
+  "id": 20,
+  "name": "Gemuruh"
+}, {
+  "id": 21,
+  "name": "Nancang"
+}, {
+  "id": 22,
+  "name": "Dioknisi"
+}, {
+  "id": 23,
+  "name": "Кондово"
+}, {
+  "id": 24,
+  "name": "Trablice"
+}, {
+  "id": 25,
+  "name": "Kensington"
+}, {
+  "id": 26,
+  "name": "Niaohe"
+}, {
+  "id": 27,
+  "name": "Rimpakgede"
+}, {
+  "id": 28,
+  "name": "Namangan"
+}, {
+  "id": 29,
+  "name": "Tabunok"
+}, {
+  "id": 30,
+  "name": "Poste du Lac"
+}, {
+  "id": 31,
+  "name": "Baochang"
+}, {
+  "id": 32,
+  "name": "Ihosy"
+}, {
+  "id": 33,
+  "name": "Perrelos"
+}, {
+  "id": 34,
+  "name": "Tolotangga"
+}, {
+  "id": 35,
+  "name": "Miramichi"
+}, {
+  "id": 36,
+  "name": "Zhushan"
+}, {
+  "id": 37,
+  "name": "Mattaldi"
+}, {
+  "id": 38,
+  "name": "Bin’an"
+}, {
+  "id": 39,
+  "name": "Serpukhov"
+}, {
+  "id": 40,
+  "name": "Sheksna"
+}, {
+  "id": 41,
+  "name": "Vantaa"
+}, {
+  "id": 42,
+  "name": "San Marcos"
+}, {
+  "id": 43,
+  "name": "Wang Nam Yen"
+}, {
+  "id": 44,
+  "name": "Prnjavor"
+}, {
+  "id": 45,
+  "name": "Horgo"
+}, {
+  "id": 46,
+  "name": "Prengtale"
+}, {
+  "id": 47,
+  "name": "Woro"
+}, {
+  "id": 48,
+  "name": "Itaúna"
+}, {
+  "id": 49,
+  "name": "Lao Suea Kok"
+}, {
+  "id": 50,
+  "name": "Holoubkov"
+}, {
+  "id": 51,
+  "name": "Krujë"
+}, {
+  "id": 52,
+  "name": "Toulon"
+}, {
+  "id": 53,
+  "name": "Magdalena"
+}, {
+  "id": 54,
+  "name": "Montepuez"
+}, {
+  "id": 55,
+  "name": "Suwaluh"
+}, {
+  "id": 56,
+  "name": "Tarłów"
+}, {
+  "id": 57,
+  "name": "Sorang"
+}, {
+  "id": 58,
+  "name": "Guaíba"
+}, {
+  "id": 59,
+  "name": "Lloque"
+}, {
+  "id": 60,
+  "name": "Krzemieniewo"
+}, {
+  "id": 61,
+  "name": "Fengtang"
+}, {
+  "id": 62,
+  "name": "Caleta Olivia"
+}, {
+  "id": 63,
+  "name": "’Unābah"
+}, {
+  "id": 64,
+  "name": "Puerto Asís"
+}, {
+  "id": 65,
+  "name": "Sanfang"
+}, {
+  "id": 66,
+  "name": "Dongdai"
+}, {
+  "id": 67,
+  "name": "Bograd"
+}, {
+  "id": 68,
+  "name": "Milići"
+}, {
+  "id": 69,
+  "name": "Itiruçu"
+}, {
+  "id": 70,
+  "name": "Liuhuang"
+}, {
+  "id": 71,
+  "name": "Sabaneta"
+}, {
+  "id": 72,
+  "name": "Burtunay"
+}, {
+  "id": 73,
+  "name": "Tynne"
+}, {
+  "id": 74,
+  "name": "Simpang"
+}, {
+  "id": 75,
+  "name": "Bukovec"
+}, {
+  "id": 76,
+  "name": "Norrköping"
+}, {
+  "id": 77,
+  "name": "Chicago"
+}, {
+  "id": 78,
+  "name": "Santana do Ipanema"
+}, {
+  "id": 79,
+  "name": "Mehrābpur"
+}, {
+  "id": 80,
+  "name": "Āshtīān"
+}, {
+  "id": 81,
+  "name": "Houston"
+}, {
+  "id": 82,
+  "name": "Trondheim"
+}, {
+  "id": 83,
+  "name": "Végueta"
+}, {
+  "id": 84,
+  "name": "Sadovo"
+}, {
+  "id": 85,
+  "name": "Fangbu"
+}, {
+  "id": 86,
+  "name": "N’dalatando"
+}, {
+  "id": 87,
+  "name": "Gorna Oryakhovitsa"
+}, {
+  "id": 88,
+  "name": "Hejia"
+}, {
+  "id": 89,
+  "name": "Ivouani"
+}, {
+  "id": 90,
+  "name": "Diawara"
+}, {
+  "id": 91,
+  "name": "Tsapêraī"
+}, {
+  "id": 92,
+  "name": "Salt Lake City"
+}, {
+  "id": 93,
+  "name": "Papatowai"
+}, {
+  "id": 94,
+  "name": "Jinshan"
+}, {
+  "id": 95,
+  "name": "Onomichi"
+}, {
+  "id": 96,
+  "name": "Qianjin"
+}, {
+  "id": 97,
+  "name": "Lavradio"
+}, {
+  "id": 98,
+  "name": "Kotabumi"
+}, {
+  "id": 99,
+  "name": "Shaxi"
+}, {
+  "id": 100,
+  "name": "Yanas"
+}]
+
+from random import randint
+with app.app_context():
+    
+    # vehicles = []
+    # for vehicle in sample_data:
+    #     vehicle = Vehicle(**vehicle)
+    #     vehicles.append(vehicle)
+    # db.session.add_all(vehicles)
+    # db.session.commit()
+
+    vehicles = Vehicle.query.all()
+    all_routes = []
+    
+    for route_data in routes:
+        route = Route(**route_data)
+        route.vehicle = vehicles[randint(0, len(vehicles) - 1)]
+        all_routes.append(route)
+    
+    db.session.add_all(all_routes)
+    db.session.commit()
+    
+
+
+# from random import randint
+# with app.app_context():
+#   # vehicles = []
+#   # for vehicle in sample_data:
+#   #   vehicle = Vehicle(**vehicle)
+#   #   vehicles.append(vehicle)
+#   # db.session.add_all(vehicles)
+#   # db.session.commit()
+#    vehicles = Vehicle.query.all()
+#    allrouters = []
+#    for route in routes:
+#      router = Route(**route)
+#      router.vehicle = vehicles[randint(1,99)]
+#      allrouters.append(router)
+#    db.session.add_all(vehicles)
+#    db.session.commit()

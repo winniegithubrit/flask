@@ -1,0 +1,17 @@
+<h4>VEHICLE PROFILE</h4>
+
+<h5>ID:{{vehicle['id']}}</h5>
+<h5>VEHICLE_NAME:{{vehicle['name']}}</h5>
+<h5>DRIVER:{{vehicle['driver']}}</h5>
+<h5>CONDUCTOR:{{vehicle['conductor']}}</h5>
+ROUTES_TAKEN:
+{%if routings%}
+<ul>
+   {% for route in routings %}
+   <li>{{route['name']}}<li>
+   {%endfor%}
+   <ul>
+{%endif%}
+
+
+
